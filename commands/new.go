@@ -11,9 +11,8 @@ import (
 var New = cli.Command{
 	Name: "new",
 	Flags: []cli.Flag{
-		cli.StringFlag{
-			Name: "path",
-		},
+		cli.StringFlag{Name: "path"},
+		cli.StringFlag{Name: "skel"},
 	},
 	Action: func(ctx *cli.Context) error {
 
@@ -28,6 +27,10 @@ var New = cli.Command{
 		}
 
 		if err := builder.SetProjectPath(ctx.String("path")); err != nil {
+			return err
+		}
+
+		if err := builder.SetSkeleton(ctx.String("skel")); err != nil {
 			return err
 		}
 

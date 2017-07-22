@@ -15,6 +15,7 @@ import (
 type Builder struct {
 	Name        string
 	GoPath      string
+	Skeleton    string
 	ProjectPath string
 	PackagePath string
 }
@@ -56,13 +57,20 @@ func (builder *Builder) SetProjectPath(p string) error {
 	return nil
 }
 
+// SetSkeleton ...
+// TODO
+func (builder *Builder) SetSkeleton(skel string) error {
+	builder.Skeleton = "marmoset"
+	return nil
+}
+
 // CopySkeleton ...
 func (builder *Builder) CopySkeleton() error {
 	pkg, err := build.Import(naepath, "", build.FindOnly)
 	if err != nil {
 		return err
 	}
-	if err = copy(filepath.Join(pkg.Dir, "skel"), builder.ProjectPath); err != nil {
+	if err = copy(filepath.Join(pkg.Dir, "skel", builder.Skeleton), builder.ProjectPath); err != nil {
 		return err
 	}
 	return nil
