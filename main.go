@@ -14,7 +14,6 @@ func main() {
 	app.Usage = "New GAE/Go Application"
 	app.Commands = []cli.Command{
 		commands.New,
-		commands.Start,
 	}
 	if err := app.Run(os.Args); err != nil {
 		fmt.Println(err.Error())
